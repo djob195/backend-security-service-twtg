@@ -1,0 +1,19 @@
+{
+  "name": "secure-service-twtg",
+  "version": "1.0.0",
+  "description": "microservice of the security",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djorellanabmrb/secure-service-twtg.git"
+  },
+  "author": "djorellanab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djorellanabmrb/secure-service-twtg/issues"
+  },
+  "homepage": "https://github.com/djorellanabmrb/secure-service-twtg#readme"
+}
