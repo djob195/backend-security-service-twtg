@@ -1,7 +1,8 @@
 const { asClass } = require('awilix');
-const healthcheckPath = require('../swagger/paths/healthcheck.path');
+const {HealthcheckMiddleware, InternationalizationMiddleware} = require("middlewares-twtg")
 module.exports = function(container){
     container.register({
-        HealtCheckMiddleware: asClass(HealtCheckMiddleware).singleton()
+        HealthcheckMiddleware: asClass(HealthcheckMiddleware).singleton(),
+        InternationalizationMiddleware: asClass(InternationalizationMiddleware).singleton()
     });
 }

@@ -4,7 +4,8 @@
   "description": "microservice of the security",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-dev-dep": "npm uninstall middlewares-twtg && npm install middlewares-twtg"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/djorellanabmrb/secure-service-twtg/issues"
   },
-  "homepage": "https://github.com/djorellanabmrb/secure-service-twtg#readme"
+  "homepage": "https://github.com/djorellanabmrb/secure-service-twtg#readme",
+  "dependencies": {
+    "awilix": "^4.2.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "middlewares-twtg": "git+https://github.com/djorellanabmrb/middlewares-twtg.git"
+  }
 }
