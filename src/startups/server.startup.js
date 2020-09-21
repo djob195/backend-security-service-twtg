@@ -1,9 +1,9 @@
 const express = require('express');
+const {ApiConfig} = require("configs-twtg");
 
 class Server {
 
-    constructor({ SiteConfig, RouterStartup }) {
-      this.SiteConfig = SiteConfig;
+    constructor({ RouterStartup }) {
       this.express = express().use(RouterStartup);
       this.express.disable('x-powered-by');
       this.server = null;
@@ -11,8 +11,8 @@ class Server {
   
     start() {
       return new Promise(resolve => {
-        this.server = this.express.listen(this.SiteConfig.port, () => {
-          console.log(`services security running on port ${this.SiteConfig.port}`);
+        this.server = this.express.listen(ApiConfig.port, () => {
+          console.log(`services security running on port ${ApiConfig.port}`);
           resolve();
         });
       });
