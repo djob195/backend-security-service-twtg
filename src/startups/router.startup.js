@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-module.exports = function router({HealtCheckMiddleware, InternationalizationMiddleware}) {
+module.exports = function router({HealthcheckMiddleware, InternationalizationMiddleware, AuthenticationRouter}) {
     const router = express.Router();
     
     router.use(express.json())
@@ -10,7 +10,8 @@ module.exports = function router({HealtCheckMiddleware, InternationalizationMidd
     .use(helmet())
     .use(InternationalizationMiddleware.attachI18.bind(InternationalizationMiddleware));
 
-    router.use('/api/healthcheck', HealtCheckMiddleware.getStatus.bind(HealtCheckMiddleware));
+    router.use('/api/healthcheck', HealthcheckMiddleware.getStatus.bind(HealthcheckMiddleware));
+    router.use('/authentication', AuthenticationRouter);
 
     return router;
 }

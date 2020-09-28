@@ -1,7 +1,7 @@
 const { asFunction } = require('awilix');
-const { } = require("../routers");
+const { AuthenticationRouter } = require("../routers");
 module.exports = function(container){
     container.register({
-
+        AuthenticationRouter: asFunction(AuthenticationRouter).singleton(),
     });
 }

@@ -1,8 +1,11 @@
 const { asClass } = require('awilix');
-const {HealthcheckMiddleware, InternationalizationMiddleware} = require("middlewares-twtg")
+const {HealthcheckMiddleware, InternationalizationMiddleware,
+    ValidationMiddleware, JwtMiddleware} = require("middlewares-twtg")
 module.exports = function(container){
     container.register({
         HealthcheckMiddleware: asClass(HealthcheckMiddleware).singleton(),
-        InternationalizationMiddleware: asClass(InternationalizationMiddleware).singleton()
+        InternationalizationMiddleware: asClass(InternationalizationMiddleware).singleton(),
+        ValidationMiddleware: asClass(ValidationMiddleware).singleton(),
+        JwtMiddleware:  asClass(JwtMiddleware).singleton()
     });
 }

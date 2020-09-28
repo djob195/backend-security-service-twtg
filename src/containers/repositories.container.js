@@ -1,7 +1,7 @@
 const { asClass } = require('awilix');
-const { } = require("../repositories");
+const { AuthenticationRepository } = require("../repositories");
 module.exports = function(container){
     container.register({
-
+        AuthenticationRepository: asClass(AuthenticationRepository).singleton(),
     });
 }
