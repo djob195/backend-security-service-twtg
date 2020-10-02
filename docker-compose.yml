@@ -1,0 +1,71 @@
+version: "3.7"
+services: 
+    loadbalancer:
+        build: ./loadbalancer
+        tty: true
+        networks:
+            - networksec2
+        ports:
+            - '80:80'
+        depends_on:
+            - api
+        environment:
+            - WAIT_HOSTS=api:=${API_PORT}
+            - WAIT_HOSTS_TIMEOUT=300
+            - WAIT_SLEEP_INTERVAL=30
+            - WAIT_HOST_CONNECT_TIMEOUT=30
+
+    api:
+        build:
+            context: .
+        environment:
+            - API_PORT=${API_PORT}
+            - FIREBASE_TYPE=${FIREBASE_TYPE}
+            - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+            - FIREBASE_PRIVATE_KEY_ID=${FIREBASE_PRIVATE_KEY_ID}
+            - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+            - FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
+            - FIREBASE_CLIENT_ID=${FIREBASE_CLIENT_ID}
+            - FIREBASE_AUTH_URI=${FIREBASE_AUTH_URI}
+            - FIREBASE_TOKEN_URI${FIREBASE_TOKEN_URI}
+            - FIREBASE_AUTH_PROVIDER_X509_CERT_URL=${FIREBASE_AUTH_PROVIDER_X509_CERT_URL}
+            - FIREBASE_DATABASEURL=${FIREBASE_CLIENT_X509_CERT_URL}
+            - JWT_SECRET=${JWT_SECRET}
+            - JWT_SERVICE_ACCOUNT_EMAIL=${JWT_SERVICE_ACCOUNT_EMAIL}
+            - JWT_EXP_TIME=${JWT_EXP_TIME}
+            - MONGO_USERNAME=${MONGO_USERNAME}
+            - MONGO_PASSWORD=${MONGO_PASSWORD}
+            - MONGO_DATABASE=${MONGO_DATABASE}
+            - MONGO_HOST=${MONGO_HOST}
+            - MONGO_PORT=${MONGO_PORT}
+            - WAIT_HOSTS=mongodb:27017
+            - WAIT_HOSTS_TIMEOUT=300
+            - WAIT_SLEEP_INTERVAL=30
+            - WAIT_HOST_CONNECT_TIMEOUT=30
+        networks:
+            - networksec2
+        command: sh -c "/wait &&  npm run start" 
+        expose:
+            - 27017
+        depends_on:
+            - mongodb
+        
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb
+        restart: always
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+            - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+        ports:
+            - 27017:27017
+        volumes:
+            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - ./mongo/data:/data/db
+        networks:
+            - networksec2
+
+networks:
+    networksec2:
+        driver: bridge

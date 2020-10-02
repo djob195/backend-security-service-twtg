@@ -2,7 +2,7 @@ const objectMapper = require('object-mapper');
 
 module.exports = (entity) =>{
     const map = {
-        'iss:':'iss:',
+        'iss':'iss',
         'aud':'aud',
         'auth_time': 'auth_time',
         'user_id': 'user_id',

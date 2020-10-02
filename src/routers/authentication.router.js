@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const { AuthenticationValidator } = require("./validators");
-const authenticationValidator = require('./validators/authentication.validator');
 
-module.exports = function ({ AuthenticationController, ValidationMiddleware, JwtMiddleware}) {
+module.exports = function ({ AuthenticationController, ValidationMiddleware}) {
     const router = Router();
 
     router.post('/login',
@@ -10,9 +9,13 @@ module.exports = function ({ AuthenticationController, ValidationMiddleware, Jwt
     ValidationMiddleware.checkValidations,
     AuthenticationController.login.bind(AuthenticationController));
 
-    router.get("/check",
-    JwtMiddleware.isAuthorized,
-    (req,res,next)=>{  return res.status(200).json({message: "its live"});})
+    router.post('/new',
+    AuthenticationValidator.postLogin,
+    ValidationMiddleware.checkValidations,
+    AuthenticationController.post.bind(AuthenticationController));
+
+    router.get('/:id',
+    AuthenticationController.get.bind(AuthenticationController));
 
     return router;
 };
