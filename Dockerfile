@@ -1,5 +1,6 @@
 FROM node
 COPY ./startup.sh /startup.sh
+RUN chmod +x  /startup.sh
 RUN apt-get update
 RUN apt-get install -y git
 
@@ -19,5 +20,5 @@ COPY . .
 RUN chmod +x /startup.sh
 RUN npm install 
 
-ENTRYPOINT sh -c "./startup.sh"
+ENTRYPOINT sh -c "/startup.sh"
 EXPOSE 3000
