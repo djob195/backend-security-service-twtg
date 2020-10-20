@@ -7,9 +7,9 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-dev-dep": "npm run install-configs && npm run install-middleware && npm run install-odm",
-    "install-middleware": "npm uninstall djorellanabmrb/middlewares-twtg#master && npm install --save djorellanabmrb/middlewares-twtg#master -or-commit-or-tag",
-    "install-configs": "npm uninstall djorellanabmrb/configs-twtg#master && npm install --save djorellanabmrb/configs-twtg#master -or-commit-or-tag",
-    "install-odm": "npm uninstall djorellanabmrb/odm-twtg#master && npm install --save djorellanabmrb/odm-twtg#master -or-commit-or-tag"
+    "install-middleware": "npm uninstall twowheelstogo/backend-middlewares-twtg#master && npm install --save twowheelstogo/backend-middlewares-twtg#master -or-commit-or-tag",
+    "install-configs": "npm uninstall twowheelstogo/backend-configs-twtg#master && npm install --save twowheelstogo/backend-configs-twtg#master -or-commit-or-tag",
+    "install-odm": "npm uninstall twowheelstogo/backend-odm-twtg#master && npm install --save twowheelstogo/backend-odm-twtg#master -or-commit-or-tag"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/djorellanabmrb/secure-service-twtg#readme",
   "dependencies": {
     "awilix": "^4.2.6",
-    "configs-twtg": "github:djorellanabmrb/configs-twtg#master",
+    "configs-twtg": "github:twowheelstogo/backend-configs-twtg#master",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
@@ -32,8 +32,8 @@
     "google-auth-library": "^6.1.0",
     "helmet": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
-    "middlewares-twtg": "github:djorellanabmrb/middlewares-twtg#master",
+    "middlewares-twtg": "github:twowheelstogo/backend-middlewares-twtg#master",
     "object-mapper": "^6.2.0",
-    "odm-twtg": "github:djorellanabmrb/odm-twtg#master"
+    "odm-twtg": "github:twowheelstogo/backend-odm-twtg#master"
   }
 }
