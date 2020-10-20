@@ -9,7 +9,7 @@ module.exports = function router({HealthcheckMiddleware, InternationalizationMid
     .use(cors())
     .use(helmet())
     .use(InternationalizationMiddleware.attachI18.bind(InternationalizationMiddleware));
-    router.use('/', HealthcheckMiddleware.getStatus.bind(HealthcheckMiddleware));
+    router.use('/healthcheck', HealthcheckMiddleware.getStatus.bind(HealthcheckMiddleware));
     router.use('/authentication', AuthenticationRouter);
 
     return router;

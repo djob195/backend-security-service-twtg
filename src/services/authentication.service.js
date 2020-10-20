@@ -14,15 +14,7 @@ class AuthenticationService{
     }
 
     async create(idToken){
-        var faker = require('faker');
         let user = {};
-        user.firstName = faker.name.firstName();
-        user.lastName = faker.name.lastName();
-        user.agente = faker.random.word();
-        user.company = "pollo brujo";
-        user.companyId ="PB20200104";
-        user.branchOfficeId = "20200104";
-        user.branchOffice = "gran vía";
         await this.AuthenticationRepository.create(idToken,user);
     }
 
@@ -31,14 +23,9 @@ class AuthenticationService{
         const user =  loginMapping(result);
         let date = Date.now();
         let ormUser = await this.getByUid(user.user_id);
-        const token = await jwt.sign({
-            iss: JwtConfig.serviceAccountEmail,
-            sub: JwtConfig.serviceAccountEmail,
-            aud: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
-            iat: date,
-            exp: date +  JwtConfig.expTime,
-            uid: user.uid,
-            claims: {
+        let claims = null;
+        try {
+            claims = {
                 firstName: ormUser.firstName,
                 lastName: ormUser.lastName,
                 biker: ormUser.agente,
@@ -47,6 +34,18 @@ class AuthenticationService{
                 branchOfficeId: ormUser.branchOfficeId,
                 branchOffice: ormUser.branchOffice,
             }
+        } catch (error) {
+            error.code = 400;
+            throw error;
+        }
+        const token = await jwt.sign({
+            iss: JwtConfig.serviceAccountEmail,
+            sub: JwtConfig.serviceAccountEmail,
+            aud: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
+            iat: date,
+            exp: date +  JwtConfig.expTime,
+            uid: user.uid,
+            claims
         }, JwtConfig.secret);
         return {token};
     }
