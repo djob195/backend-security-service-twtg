@@ -20,19 +20,19 @@ class AuthenticationRepository {
            "actualPosition":actualPosition,
            "name": tmp.name,
            "disponibility":"Avaliable",
-           "company":"GL OFIBODEGAS",
-           "companyId":"GL20200517",
-           "SUCURSAL":"GL OFIBODEGAS",
-           "branchId":"GLOFIBODEGAS20200517"
+           "company":"Delivery Lab",
+           "companyId":"DL2020",
+           "SUCURSAL":"Sucursal del Delivery Lab",
+           "branchId":"DELIVERYLAB2020"
        });
         user.uid = tmp.user_id;
         user.firstName =  tmp.name;
         user.lastName = tmp.name;
         user.agente = tmp.user_id;
-        user.company = "GL OFIBODEGAS";
-        user.companyId ="GL20200517";
-        user.branchOfficeId = "GL OFIBODEGAS";
-        user.branchOffice = "GLOFIBODEGAS20200517";
+        user.company = "Delivery Lab";
+        user.companyId ="DL2020";
+        user.branchOfficeId = "Sucursal del Delivery Lab";
+        user.branchOffice = "DELIVERYLAB2020";
         const userModel = new this.twtOdm.db.UserModel(user);
         let demo = await userModel.save();
         return demo;
