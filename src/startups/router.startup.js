@@ -8,7 +8,7 @@ module.exports = function router({HealthcheckMiddleware, InternationalizationMid
     router.use(express.json())
     .use(cors())
     .use(helmet())
-    .use(InternationalizationMiddleware.attachI18.bind(InternationalizationMiddleware));
+    //.use(InternationalizationMiddleware.attachI18.bind(InternationalizationMiddleware));
     router.use('/healthcheck', HealthcheckMiddleware.getStatus.bind(HealthcheckMiddleware));
     router.use('/authentication', AuthenticationRouter);
 
