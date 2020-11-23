@@ -1,8 +1,9 @@
 const { asClass } = require('awilix');
-const { AuthenticationService } = require("../services");
+const { AuthenticationService, UserService } = require("../services");
 
 module.exports = function(container){
     container.register({
-        AuthenticationService: asClass(AuthenticationService).singleton()
+        AuthenticationService: asClass(AuthenticationService).singleton(),
+        UserService: asClass(UserService).singleton()
     });
 }

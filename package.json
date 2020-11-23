@@ -34,6 +34,7 @@
     "jsonwebtoken": "^8.5.1",
     "middlewares-twtg": "github:twowheelstogo/backend-middlewares-twtg#master",
     "object-mapper": "^6.2.0",
-    "odm-twtg": "github:twowheelstogo/backend-odm-twtg#master"
+    "odm-twtg": "github:twowheelstogo/backend-odm-twtg#master",
+    "swagger-ui-express": "^4.1.4"
   }
 }

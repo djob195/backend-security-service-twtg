@@ -1,8 +1,12 @@
 const { Router } = require('express');
 const { AuthenticationValidator } = require("./validators");
 
-module.exports = function ({ AuthenticationController, ValidationMiddleware}) {
+module.exports = function ({ AuthenticationController, ValidationMiddleware, JwtMiddleware}) {
     const router = Router();
+
+    router.post('/refresh-token',
+    JwtMiddleware.isAuthorized,
+    AuthenticationController.refresh.bind(AuthenticationController));
 
     router.post('/login',
     AuthenticationValidator.postLogin,
@@ -10,12 +14,9 @@ module.exports = function ({ AuthenticationController, ValidationMiddleware}) {
     AuthenticationController.login.bind(AuthenticationController));
 
     router.post('/new',
-    AuthenticationValidator.postLogin,
+    AuthenticationValidator.create,
     ValidationMiddleware.checkValidations,
     AuthenticationController.post.bind(AuthenticationController));
-
-    router.get('/:id',
-    AuthenticationController.get.bind(AuthenticationController));
 
     return router;
 };
