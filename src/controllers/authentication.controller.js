@@ -37,7 +37,7 @@ class AuthenticationController{
              await this.AuthenticationService.create(req.body.idToken, pushToken);
             return res.status(201).json({message: "user was created"});
         } catch (error) {
-            console.log(error);
+            console.log({error});
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
