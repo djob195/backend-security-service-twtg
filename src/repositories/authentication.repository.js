@@ -13,7 +13,30 @@ class AuthenticationRepository {
     }
 
     async create(idToken, user){
-        let tmp = await this.adminfb.auth().verifyIdToken(idToken);
+        let tmp = null;
+        try {
+            tmp = await this.adminfb.auth().verifyIdToken(idToken);
+        } catch (errorAuth) {
+            let error = null;
+            switch (errorAuth.code) {
+                case "auth/id-token-expired":{
+                    error = new Error("errors.authentication.e4");
+                    error.code = 409;
+                    break;
+                }
+                case "auth/id-token-revoked":{
+                    error = new Error("errors.authentication.e5");
+                    error.code = 409;
+                    break;
+                }
+                default:{
+                    error = errorAuth;
+                    error.code = 500
+                    break;
+                }
+            }
+            throw error;
+        }
         user.uid = tmp.user_id;
         let nameTmp = tmp.name || "sin-nombre sin-apellido";
         nameTmp = nameTmp.split(" ");
@@ -34,7 +57,30 @@ class AuthenticationRepository {
     }
 
     async login(uid, pushToken){
-        let tmp = await this.adminfb.auth().verifyIdToken(uid); 
+        let tmp = null;
+        try {
+            tmp = await this.adminfb.auth().verifyIdToken(uid); 
+        } catch (errorAuth) {
+            let error = null;
+            switch (errorAuth.code) {
+                case "auth/id-token-expired":{
+                    error = new Error("errors.authentication.e4");
+                    error.code = 409;
+                    break;
+                }
+                case "auth/id-token-revoked":{
+                    error = new Error("errors.authentication.e5");
+                    error.code = 409;
+                    break;
+                }
+                default:{
+                    error = errorAuth;
+                    error.code = 500
+                    break;
+                }
+            }
+            throw error;
+        }
         let data =  await this.twtOdm.db.UserModel.findOneAndUpdate({uid:tmp.uid}, {pushToken});
         if(data == undefined){
             let error = new Error("errors.authentication.e1");
@@ -46,7 +92,7 @@ class AuthenticationRepository {
             error.code = 401;
             throw error;
         }
-        /*const db = this.adminfb.firestore();
+        const db = this.adminfb.firestore();
         let fbUser = await db.collection('bikers')
         .doc(tmp.user_id);
         fbUser = await fbUser.get();
@@ -55,7 +101,7 @@ class AuthenticationRepository {
             let error = new Error("errors.authentication.e3");
             error.code = 401;
             throw error;
-        }*/
+        }
         await db.collection('bikers')
         .doc(tmp.user_id).update({
             "pushToken": pushToken
