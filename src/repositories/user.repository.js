@@ -54,7 +54,6 @@ class UserRepository {
             ...user,
             "pushToken": tmpUser.pushToken
         }
-        console.log(tmpUser);
         if(type == "PERMANENT"){
             let branch = await db.collection('branches').doc(branchId).get();
             if (!branch.exists)
@@ -80,7 +79,9 @@ class UserRepository {
                 "branchId": null
             };
         }
-        console.log({user});
+        if(type != "AVAILABLE"){
+            _notifyBiker(tmpUser.pushToken); 
+        }
         await db.collection('bikers').doc(userId).update(user);
     }
 
@@ -125,7 +126,6 @@ class UserRepository {
                     }                
                 }
                 await doc.set(biker);  
-                _notifyBiker(data.pushToken); 
             }
             else
                 await doc.update(biker);

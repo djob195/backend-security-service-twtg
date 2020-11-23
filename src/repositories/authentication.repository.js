@@ -1,3 +1,5 @@
+const { getUser } = require("../routers/validators/user.validator");
+
 class AuthenticationRepository {
     constructor({adminfb, twtOdm}){
         this.adminfb = adminfb;
@@ -45,6 +47,15 @@ class AuthenticationRepository {
             throw error;
         }
         const db = this.adminfb.firestore();
+        let fbUser = await db.collection('bikers')
+        .doc(tmp.user_id);
+        fbUser = await fbUser.get();
+        fbUser = getUser.data();
+        if(fbUser.type == "AVAILABLE"){
+            let error = new Error("errors.authentication.e3");
+            error.code = 401;
+            throw error;
+        }
         await db.collection('bikers')
         .doc(tmp.user_id).update({
             "pushToken": pushToken
