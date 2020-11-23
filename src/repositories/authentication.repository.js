@@ -96,7 +96,7 @@ class AuthenticationRepository {
         let fbUser = await db.collection('bikers')
         .doc(tmp.user_id);
         fbUser = await fbUser.get();
-        fbUser = getUser.data();
+        fbUser = fbUser.data();
         if(fbUser.type == "AVAILABLE"){
             let error = new Error("errors.authentication.e3");
             error.code = 401;
