@@ -30,8 +30,8 @@ class AuthenticationRepository {
                     break;
                 }
                 default:{
-                    error = errorAuth;
-                    error.code = 500
+                    error = new Error(errorAuth.message);
+                    error.code = 500;
                     break;
                 }
             }
@@ -74,8 +74,8 @@ class AuthenticationRepository {
                     break;
                 }
                 default:{
-                    error = errorAuth;
-                    error.code = 500
+                    error = new Error(errorAuth.message);
+                    error.code = 500;
                     break;
                 }
             }
