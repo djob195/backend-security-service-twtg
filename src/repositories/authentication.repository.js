@@ -12,34 +12,44 @@ class AuthenticationRepository {
 
     async create(idToken, user){
         let tmp = await this.adminfb.auth().verifyIdToken(idToken);
-        let actualPosition =  await new this.adminfb.firestore.GeoPoint(14,0);
-        const db = this.adminfb.firestore();
-        await db.collection('bikers')
-       .doc(tmp.user_id).set({
-           "phone":"55555555",
-           "actualPosition":actualPosition,
-           "name": tmp.name,
-           "disponibility":"Avaliable",
-           "company":"GL OFIBODEGAS",
-           "companyId":"GL20200517",
-           "SUCURSAL":"GL OFIBODEGAS",
-           "branchId":"GLOFIBODEGAS20200517"
-       });
         user.uid = tmp.user_id;
-        user.firstName =  tmp.name;
-        user.lastName = tmp.name;
-        user.agente = tmp.user_id;
-        user.company = "GL OFIBODEGAS";
-        user.companyId ="GL20200517";
-        user.branchOfficeId = "GL OFIBODEGAS";
-        user.branchOffice = "GLOFIBODEGAS20200517";
+        let nameTmp = tmp.name || "sin-nombre sin-apellido";
+        nameTmp = nameTmp.split(" ");
+        user.firstName =  (nameTmp[0]==undefined) ? "sin nombre": nameTmp[0];
+        user.lastName = (nameTmp[1]==undefined) ? "sin apellido": nameTmp[1];
         const userModel = new this.twtOdm.db.UserModel(user);
-        let demo = await userModel.save();
+        let demo = null;
+        try {
+            demo = await userModel.save();   
+        } catch (error) {
+            if(error.code == 11000){
+                let error = new Error("errors.authentication.e2");
+                error.code = 409;
+                throw error;                
+            }
+        }
         return demo;
     }
 
-    async login(idToken){
-        return await this.adminfb.auth().verifyIdToken(idToken);  
+    async login(uid, pushToken){
+        let tmp = await this.adminfb.auth().verifyIdToken(uid); 
+        let data =  await this.twtOdm.db.UserModel.findOneAndUpdate({uid:tmp.uid}, {pushToken});
+        if(data == undefined){
+            let error = new Error("errors.authentication.e1");
+            error.code = 400;
+            throw error;
+        }
+        if(data.status != "ACTIVE"){
+            let error = new Error("errors.authentication.e2");
+            error.code = 401;
+            throw error;
+        }
+        const db = this.adminfb.firestore();
+        await db.collection('bikers')
+        .doc(tmp.user_id).update({
+            "pushToken": pushToken
+        });
+        return tmp;
     }
 }
 

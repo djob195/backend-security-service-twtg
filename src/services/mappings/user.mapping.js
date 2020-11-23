@@ -2,6 +2,7 @@ const objectMapper = require('object-mapper');
 
 module.exports = (entity) =>{
     const map = {
+        'id':'id',
         'uid':'uid',
         'firstName':'firstName',
         'lastName': 'lastName',
@@ -9,7 +10,9 @@ module.exports = (entity) =>{
         'company': 'company',
         'companyId': 'companyId',
         'branchOffice': 'branchOffice',
-        'branchOfficeId': 'branchOfficeId'
+        'branchOfficeId': 'branchOfficeId',
+        'available': 'available',
+        'status': 'status'
     }
     return objectMapper(entity, map);
 }

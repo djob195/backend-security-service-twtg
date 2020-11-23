@@ -14,7 +14,7 @@ class Server {
     start() {
       return new Promise(resolve => {
         this.server = this.express.listen(ApiConfig.security.port, () => {
-          console.log(`services security running on port ${ApiConfig.security.port}`);
+          console.log(`${ApiConfig.security.path} running on port ${ApiConfig.security.port}`);
           resolve();
         });
       });
