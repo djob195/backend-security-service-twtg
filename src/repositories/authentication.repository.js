@@ -46,7 +46,7 @@ class AuthenticationRepository {
             error.code = 401;
             throw error;
         }
-        const db = this.adminfb.firestore();
+        /*const db = this.adminfb.firestore();
         let fbUser = await db.collection('bikers')
         .doc(tmp.user_id);
         fbUser = await fbUser.get();
@@ -55,7 +55,7 @@ class AuthenticationRepository {
             let error = new Error("errors.authentication.e3");
             error.code = 401;
             throw error;
-        }
+        }*/
         await db.collection('bikers')
         .doc(tmp.user_id).update({
             "pushToken": pushToken
