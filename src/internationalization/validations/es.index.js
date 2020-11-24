@@ -35,6 +35,7 @@
       "val25": "eL identificador de la sucursal debe ser UUID",
       "val26": "el identificador de compañia debe ser UUID",
       "val27": "el identificador de la compañia debe tener la sucursal",
-      "val28": "el telefono debe ser númerico"
+      "val28": "el telefono debe ser númerico",
+      "val29": "si se asigna un tipo fijo debe asignarse una sucursal"
     }
 }
