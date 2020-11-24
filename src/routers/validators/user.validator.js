@@ -13,7 +13,14 @@ module.exports = {
         .isIn(["WILDCARD", "AVAILABLE", "PERMANENT"]).withMessage("users.val24"),
         query("branchId")
         .optional()
-        .isUUID().withMessage("users.val25"),
+        .isUUID().withMessage("users.val25")
+        .custom((val,{req})=>{
+            if(req.params.type != "PERMANENT")
+            {
+                throw new Error("users.val29")
+            }
+            return true;
+        }),
     ],
     geAll:[
         query("limit")
