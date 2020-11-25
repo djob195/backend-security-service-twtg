@@ -17,6 +17,7 @@ class AuthenticationController{
     }
 
     async login(req, res, next){
+        console.log("entra login");
         const idToken = req.body.idToken;
         const pushToken = req.query.pushToken;
         try {
