@@ -21,15 +21,21 @@ class BranchService{
             error.code = 400;
             throw error;
         }
-        const token = await jwt.sign({
-            iss: JwtConfig.serviceAccountEmail,
-            sub: JwtConfig.serviceAccountEmail,
-            aud: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
-            iat: date,
-            exp: date +  JwtConfig.expTime,
-            uid: uid,
-            claims
-        }, JwtConfig.secret);
+        let date = Date.now();
+        let token = null;
+        try {
+            token = await jwt.sign({
+                iss: JwtConfig.serviceAccountEmail,
+                sub: JwtConfig.serviceAccountEmail,
+                aud: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
+                iat: date,
+                exp: date +  JwtConfig.expTime,
+                uid: uid,
+                claims
+            }, JwtConfig.secret);
+        } catch (error) {   
+            console.log(error);
+        }
         return {token};
     }
 }
