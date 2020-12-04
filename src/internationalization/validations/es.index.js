@@ -1,4 +1,10 @@
   module.exports = {
+    "branch":{
+      "val1":"El correo no debe estar vacio",
+      "val2":"El correo debe ser una cadena",
+      "val3":"La contraseña no debe estar vacio",
+      "val4":"La contraseña debe ser una cadena"
+    },
     "authentication":{
         "val1": "El identificador del token no debe estar vacio",
         "val2": "El identificador del token debe ser cadena",

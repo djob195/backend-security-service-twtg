@@ -83,7 +83,7 @@ class UserRepository {
             _notifyBiker(tmpUser.pushToken); 
         }
         await db.collection('bikers').doc(userId).update(user);
-    }
+    }   
 
     async patch(userId,user, uid){
         const db = this.adminfb.firestore();

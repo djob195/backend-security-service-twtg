@@ -38,10 +38,10 @@ class AuthenticationRepository {
             throw error;
         }
         user.uid = tmp.user_id;
-        let nameTmp = tmp.name || "sin-nombre sin-apellido";
+        let nameTmp = tmp.name || "NOMBRE APELLIDO";
         nameTmp = nameTmp.split(" ");
-        user.firstName =  (nameTmp[0]==undefined) ? "sin nombre": nameTmp[0];
-        user.lastName = (nameTmp[1]==undefined) ? "sin apellido": nameTmp[1];
+        user.firstName =  (nameTmp[0]==undefined) ? "SIN NOMBRE": nameTmp[0].toUpperCase();;
+        user.lastName = (nameTmp[1]==undefined) ? "SIN APELLIDO": nameTmp[1].toUpperCase();;
         const userModel = new this.twtOdm.db.UserModel(user);
         let demo = null;
         try {
