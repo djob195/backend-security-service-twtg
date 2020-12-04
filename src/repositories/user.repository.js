@@ -28,11 +28,17 @@ class UserRepository {
         let wilcardDeliveries = await bikers
         .where("type","==", "WILDCARD").get();
         let tmpData = [];
-        wilcardDeliveries.forEach((e)=>{tmpData.push({...e.data(), id: e.id})})
+        wilcardDeliveries.forEach((e)=>{
+            let tmp =e.data();
+            delete tmp.actualResume;
+            tmpData.push({...tmp, id: e.id})})
         let tmpData2 = [];
         if(branchId){
             let assignedDeliveries = await bikers2.where("branchId", "==", branchId).get();
-            assignedDeliveries.forEach((e)=>{tmpData2.push({...e.data(),id:e.id})})
+            assignedDeliveries.forEach((e)=>{
+                let tmp =e.data();
+                delete tmp.actualResume;
+                tmpData2.push({...tmp,id:e.id})})
         }
         return tmpData.concat(tmpData2);
     }
