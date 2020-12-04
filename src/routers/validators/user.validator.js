@@ -43,11 +43,17 @@ module.exports = {
         body("firstName")
         .optional()
         .isString().withMessage("users.val2")
-        .notEmpty().withMessage("users.val3"),
+        .notEmpty().withMessage("users.val3")
+        .customSanitizer((value)=>{
+            return value.toUpperCase();
+          }),
         body("lastName")
         .optional()
         .isString().withMessage("users.val4")
-        .notEmpty().withMessage("users.val5"),
+        .notEmpty().withMessage("users.val5")
+        .customSanitizer((value)=>{
+            return value.toUpperCase();
+          }),
         body("phone")
         .optional()
         .isNumeric().withMessage("users.val28"),
