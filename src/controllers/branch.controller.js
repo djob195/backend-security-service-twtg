@@ -5,7 +5,7 @@ class BranchController{
 
     async loginBranch(req, res, next){
         try {
-            let token = this.BranchService.login(req.body.uuid);
+            let token = await this.BranchService.login(req.body.uuid);
             return res.status(201).json({token, uuid:req.body.uuid}); 
         } catch (error) {
             if(error.code){
