@@ -4,8 +4,7 @@ module.exports = {
         body("email")
         .notEmpty().withMessage("branch.val1")
         .isString().withMessage('branch.val2'),
-        param("password")
-        .optional()
+        body("password")
         .notEmpty().withMessage("branch.val3")
         .isString().withMessage('branch.val4')
     ]
