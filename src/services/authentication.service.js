@@ -2,7 +2,6 @@ const {loginMapping, userMapping} = require("./mappings");
 const jwt = require("jsonwebtoken");
 const {JwtConfig} = require("configs-twtg");
 
-
 class AuthenticationService{
     constructor({ AuthenticationRepository }){
         this.AuthenticationRepository = AuthenticationRepository;
