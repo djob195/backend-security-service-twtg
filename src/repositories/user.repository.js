@@ -48,9 +48,10 @@ class UserRepository {
             type
         };
         const db = this.adminfb.firestore();
-        let deliveries = db.collection("deliveries");
-        let pendingDeliveries = await deliveries.where("alias.id", "==", userId).get();
-        if(pendingDeliveries.size != 0){
+        let biker = await db.collection('bikers').doc(userId).get();
+        biker = await biker.data();
+        let size = biker.counters["Pendiente"] +  biker.counters["En ruta"] + biker.counters["En cola"] + biker.counters["Aceptado"]; 
+        if(size != 0){
             let error = new Error("errors.users.e4");
             error.code = 409;
             throw error;  

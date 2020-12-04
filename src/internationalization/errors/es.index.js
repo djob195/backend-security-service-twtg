@@ -9,6 +9,7 @@ module.exports = {
         "e1": "El usuario no debe estar asignado a un tipo comodin o fijo",
         "e2": "La compañia no existe",
         "e3": "La sucursal de la compañía no existe",
+        "e4": "El usuario no puede cambiarse de tipo debido que tiene ordenes pendientes, en rutas, en colas o aceptados",
         "e5": "El token no existe en la base de datos"
     }
 }
