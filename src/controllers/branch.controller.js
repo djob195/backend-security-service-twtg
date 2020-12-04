@@ -1,11 +1,12 @@
 class BranchController{
-    constructor(){
-
+    constructor({BranchService}){
+        this.BranchService = BranchService;
     }
 
     async loginBranch(req, res, next){
         try {
-            return res.status(201).json({companyId:"88c8334b-6915-48af-8189-od", branchId:"0f9f49ad-f8f7-47d1-b424-d16010289659", token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"}); 
+            let token = this.BranchService.login(req.body.uuid);
+            return res.status(201).json({token, uuid:req.body.uuid}); 
         } catch (error) {
             if(error.code){
                 return next({code: error.code, message: error.message});
