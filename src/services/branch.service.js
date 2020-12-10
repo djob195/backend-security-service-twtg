@@ -13,9 +13,43 @@ class BranchService{
                 lastName: "MRB",
                 biker: "c1Y2XSbTUFPYcIDwNKaxJuGmDZl1",
                 company: "CBC",
-                companyId: /*"8e632828-dcda-4853-9660-f82af914238f"*/ "88c8334b-6915-48af-8189-22375d591ed7",
-                branchOfficeId: /*"9de2e757-cfa1-4dd3-810b-6e5cc091d978"*/ "0f9f49ad-f8f7-47d1-b424-d16010289659",
+                companyId: "8e632828-dcda-4853-9660-f82af914238f",
+                branchOfficeId: "9de2e757-cfa1-4dd3-810b-6e5cc091d978",
                 branchOffice: "SUCURSAL PRINCIPAL",
+                circle:{
+                    ref:[
+                        {
+                            id:1,
+                            distance: 7.5,
+                            min:0,
+                            max:7.5
+                        },
+                        {
+                            id:2,
+                            distance: 14.5,
+                            min:7.5,
+                            max:14.5
+                        },
+                        {
+                            id:3,
+                            distance: 20.5,
+                            min:14.5,
+                            max:20.5
+                        },
+                        {
+                            id:4,
+                            distance: 30.5,
+                            min:20.5,
+                            max:30.5
+                        },
+                        {
+                            id:5,
+                            distance: 30.5,
+                            min:30.5,
+                            max: Number.MAX_SAFE_INTEGER
+                        }
+                    ]
+                }
             }
         } catch (error) {
             error.code = 400;
