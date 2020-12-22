@@ -59,7 +59,8 @@ class UserRepository {
         let tmpUser =  await this.twtOdm.db.UserModel.findOne({uid:userId}).exec();
         user = {
             ...user,
-            "pushToken": tmpUser.pushToken
+            "pushToken": tmpUser.pushToken,
+            "mongoId": tmpUser._id
         }
         if(type == "PERMANENT"){
             let branch = await db.collection('branches').doc(branchId).get();
