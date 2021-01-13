@@ -59,7 +59,8 @@ class UserRepository {
         let tmpUser =  await this.twtOdm.db.UserModel.findOne({uid:userId}).exec();
         user = {
             ...user,
-            "pushToken": tmpUser.pushToken
+            "pushToken": tmpUser.pushToken,
+            "mongoId": tmpUser._id.toString()
         }
         if(type == "PERMANENT"){
             let branch = await db.collection('branches').doc(branchId).get();
@@ -99,11 +100,11 @@ class UserRepository {
             let _user = await doc.get();
             if(_user.exists){
                 _user = _user.data();
-                if(_user.type != "AVAILABLE"){
+                /*if(_user.type != "AVAILABLE"){
                     let error = new Error("errors.users.e1");
                     error.code = 409;
                     throw error;
-                }
+                }*/
             }
         }
         let data = await this.twtOdm.db.UserModel.findByIdAndUpdate(userId, user, {new: true});
@@ -118,7 +119,8 @@ class UserRepository {
                 "actualPosition": actualPosition,
                 "name": `${data.firstName} ${data.lastName}`,
                 "phone":  (data.phone == undefined) ? "sin telefono" : data.phone,
-                "type": "AVAILABLE"
+                "type": "AVAILABLE",
+                "mongoId": data._id.toString()
             }
             let _tmp = await doc.get();
             if(!_tmp.exists){

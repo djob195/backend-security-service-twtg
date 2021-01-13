@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const internationalization = require("../internationalization");
 
 module.exports = function router({HealthcheckMiddleware, InternationalizationMiddleware,
-     AuthenticationRouter, ErrorMiddleware, UserRouter, BranchRouter}) {
+     AuthenticationRouter, ErrorMiddleware, UserRouter, BranchRouter, ControllerRouter}) {
     const router = express.Router();
     
     router.use(express.json())
@@ -15,6 +15,7 @@ module.exports = function router({HealthcheckMiddleware, InternationalizationMid
     router.use('/authentication', AuthenticationRouter);
     router.use('/users', UserRouter);
     router.use('/branches', BranchRouter);
+    router.use("/controller", ControllerRouter);
 
     router.use(ErrorMiddleware.checkErrors.bind(ErrorMiddleware));
 
