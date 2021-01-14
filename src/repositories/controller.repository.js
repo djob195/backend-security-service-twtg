@@ -73,7 +73,7 @@ class ControllerRepository {
         return data;
     }
     async getByUid(uid){
-        let data = await this.twtOdm.db.ControllerModel.find(uid);
+        let data = await this.twtOdm.db.ControllerModel.find({uid});
         if(data == null){
             let error = new Error("errors.authentication.e1");
             error.code = 400;
