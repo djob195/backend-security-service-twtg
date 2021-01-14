@@ -59,7 +59,7 @@ class ControllerController{
     async login(req, res, next){
         try {
             let token = await this.ControllerService.login(req.body.uuid);
-            return res.status(201).json({token, uuid:req.body.uuid}); 
+            return res.status(201).json({token}); 
         } catch (error) {
             if(error.code){
                 return next({code: error.code, message: error.message});
