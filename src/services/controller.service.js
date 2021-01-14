@@ -24,7 +24,8 @@ class ControllerService{
     }
     async login(uid){
         let tmp = await this.ControllerRepository.login(uid);
-        let tmpMongo = await this.ControllerRepository.getByUid(uid);
+        let tmpMongo = await this.ControllerRepository.getByUid(tmp.user_id);
+        tmpMongo = tmpMongo[0];
         let claims = null;
         try {
             claims = {
@@ -47,7 +48,7 @@ class ControllerService{
                 aud: "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
                 iat: date,
                 exp: date +  JwtConfig.expTime,
-                uid: uid,
+                uid: tmpMongo.uid,
                 claims
             }, JwtConfig.secret);
         } catch (error) {   

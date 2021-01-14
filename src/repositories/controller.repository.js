@@ -1,9 +1,11 @@
+//const config = require("configs-twtg");
 class ControllerRepository {
     constructor({twtOdm, adminfb}){
         this.adminfb = adminfb;
         this.twtOdm = twtOdm;
     }
     async login (uid){
+        let tmp = null;
         try {
             tmp = await this.adminfb.auth().verifyIdToken(uid); 
         } catch (errorAuth) {
@@ -62,9 +64,7 @@ class ControllerRepository {
     }
     
     async get(controllerId){
-        let data = await this.twtOdm.db.ControllerModel.findById(controllerId);
-        let trya = await this.twtOdm.db.ControllerModel.findOne({_id:controllerId}).exec();
-        console.log(trya._id.toString());    
+        let data = await this.twtOdm.db.ControllerModel.findById(controllerId); 
         if(data == null){
             let error = new Error("errors.authentication.e1");
             error.code = 400;
@@ -73,7 +73,7 @@ class ControllerRepository {
         return data;
     }
     async getByUid(uid){
-        let data = await this.twtOdm.db.ControllerModel.find(uid);
+        let data = await this.twtOdm.db.ControllerModel.find({uid}).exec();
         if(data == null){
             let error = new Error("errors.authentication.e1");
             error.code = 400;
