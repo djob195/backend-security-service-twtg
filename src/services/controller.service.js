@@ -24,7 +24,7 @@ class ControllerService{
     }
     async login(uid){
         let tmp = await this.ControllerRepository.login(uid);
-        let tmpMongo = await this.ControllerRepository.getByUid(uid);
+        let tmpMongo = await this.ControllerRepository.getByUid(tmp.user_id);
         let claims = null;
         try {
             claims = {
