@@ -15,7 +15,7 @@ module.exports = function router({HealthcheckMiddleware, InternationalizationMid
     router.use('/authentication', AuthenticationRouter);
     router.use('/users', UserRouter);
     router.use('/branches', BranchRouter);
-    router.use("/controller", ControllerRouter);
+    router.use("/controllers", ControllerRouter);
 
     router.use(ErrorMiddleware.checkErrors.bind(ErrorMiddleware));
 
