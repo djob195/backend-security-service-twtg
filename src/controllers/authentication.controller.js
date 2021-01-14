@@ -17,12 +17,14 @@ class AuthenticationController{
     }
 
     async login(req, res, next){
+        console.log("entra login");
         const idToken = req.body.idToken;
         const pushToken = req.query.pushToken;
         try {
             const result = await this.AuthenticationService.login(idToken, pushToken);
             return res.status(201).json(result);
         } catch (error) {
+            console.log(error);
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
