@@ -4,6 +4,7 @@ class ControllerRepository {
         this.twtOdm = twtOdm;
     }
     async login (uid){
+        let tmp = null;
         try {
             tmp = await this.adminfb.auth().verifyIdToken(uid); 
         } catch (errorAuth) {
