@@ -13,8 +13,6 @@ module.exports = {
     patchValidator: [   
         param("id")
         .isMongoId().withMessage(""),
-        body("uid")
-        .isString().withMessage(""),
         body("firstName")
         .optional()
         .notEmpty().withMessage("")
@@ -34,12 +32,9 @@ module.exports = {
         .isBoolean().withMessage(""),
         body("role")
         .optional()
-        .isIn(['ADMIN', 'CUSTOMER_SERVICE']).withMessage("")
+        .isIn(['ADMINISTRATOR', 'CONTROLLER', 'USER']).withMessage("")
     ],
     createValidator: [
-        body("uid")
-        .notEmpty().withMessage("")
-        .isString().withMessage(""),
         body("firstName")
         .notEmpty().withMessage("")
         .isString().withMessage(""),
@@ -53,7 +48,9 @@ module.exports = {
         .optional()
         .isUUID().withMessage(""),
         body("role")
-        .isIn(['ADMIN', 'CUSTOMER_SERVICE']).withMessage("")
+        .isIn(['ADMINISTRATOR', 'CONTROLLER', 'USER']).withMessage(""),
+        body("email")
+        .isEmail().withMessage("")
     ],
     loginValidator: [
         body("uuid")

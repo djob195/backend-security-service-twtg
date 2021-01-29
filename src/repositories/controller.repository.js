@@ -1,7 +1,26 @@
+
 class ControllerRepository {
     constructor({twtOdm, adminfb}){
         this.adminfb = adminfb;
         this.twtOdm = twtOdm;
+    }
+    async createAuth(email){
+        let user = null;
+        let password = null;
+        try {
+            const cryptoRandomString = require('crypto-random-string');
+            password = cryptoRandomString({length: 16, type: 'alphanumeric'});
+            user = await this.adminfb.auth().createUser({
+                email: email,
+                emailVerified: false,
+                password: password,
+                disabled: false
+              });
+        } catch (error) {
+            let err = new Error("");
+            throw new err;
+        }
+        return {uid: user.uid, password};
     }
     async login (uid){
         let tmp = null;
