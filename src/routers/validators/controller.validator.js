@@ -11,8 +11,11 @@ module.exports = {
         .isInt().withMessage("")
     ],
     patchValidator: [   
-        param("id")
+        body("mongoId")
         .isMongoId().withMessage(""),
+        body("uid")
+        .notEmpty().withMessage("")
+        .isString().withMessage(""),
         body("firstName")
         .optional()
         .notEmpty().withMessage("")
@@ -56,5 +59,17 @@ module.exports = {
         body("uuid")
         .notEmpty().withMessage("branch.val1")
         .isString().withMessage('branch.val2')
-    ]
+    ],
+    updatePasswordValidator:[
+        body("uid")
+        .notEmpty().withMessage("branch.val1")
+        .isString().withMessage('branch.val2'),
+        body("password")
+        .notEmpty().withMessage("")
+        .isString().withMessage(''),
+    ],
+    forgotPasswordValidator:[
+        body("email")
+        .isEmail().withMessage("")
+    ],
 }

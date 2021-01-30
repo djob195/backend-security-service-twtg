@@ -4,6 +4,34 @@ class ControllerRepository {
         this.adminfb = adminfb;
         this.twtOdm = twtOdm;
     }
+    async updatePassword(uid, password){
+        const db = this.adminfb.firestore();
+        let doc = db.collection('controllers').doc(uid);
+        await this.adminfb.auth().updateUser(uid,{
+            password
+        });
+        await doc.update({isFirstTime:false});
+    }
+
+    async forgotPassword(email){
+        try {
+            const cryptoRandomString = require('crypto-random-string');
+            let password = cryptoRandomString({length: 16, type: 'alphanumeric'});
+            let user = await this.adminfb.auth().getUserByEmail(email);
+            await this.adminfb.auth().updateUser(user.uid,{
+                password
+            });
+            const db = this.adminfb.firestore();
+            let doc = db.collection('controllers').doc(user.uid);
+            await doc.update({isFirstTime:true});
+            return {uid: user.uid, password};
+        } catch (error) {
+            console.log(error);
+            let err = new Error();
+            throw err;
+        }
+    }
+
     async createAuth(email){
         let user = null;
         let password = null;
@@ -57,6 +85,7 @@ class ControllerRepository {
             demo = await controllerModel.save();   
             let doc = db.collection('controllers').doc(controller.uid);
             delete controller.uid;
+            controller.isFirstTime = true;
             controller = {...controller, mongoId: demo.id};
             await doc.set(controller);
         } catch (error) {
@@ -83,8 +112,6 @@ class ControllerRepository {
     
     async get(controllerId){
         let data = await this.twtOdm.db.ControllerModel.findById(controllerId);
-        let trya = await this.twtOdm.db.ControllerModel.findOne({_id:controllerId}).exec();
-        console.log(trya._id.toString());    
         if(data == null){
             let error = new Error("errors.authentication.e1");
             error.code = 400;
@@ -122,12 +149,18 @@ class ControllerRepository {
         _controller = await _controller.data();
         if(_controller!=undefined){
             if(controller.active == false){
+                await this.adminfb.auth().updateUser(uid,{
+                    disabled:true
+                });
                 await controllerRef.delete();
             }else{
                 await controllerRef.update(data);
             }
         }else{
             if(controller.active == true){
+                await this.adminfb.auth().updateUser(uid,{
+                    disabled:false
+                });
                 await controllerRef.set(data);
             }
         }
