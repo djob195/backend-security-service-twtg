@@ -46,9 +46,12 @@ class ControllerController{
 
     async patch(req, res, next){
         try {
-            let tmp = await this.ControllerService.patch(req.params.id, req.body);
+            const mongoid = req.body.mongoId;
+            delete req.body.mongoId;
+            let tmp = await this.ControllerService.patch(mongoid, req.body);
             return res.status(201).json({message:"okay"});    
         } catch (error) {
+            console.log(error);
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
@@ -61,6 +64,31 @@ class ControllerController{
             let token = await this.ControllerService.login(req.body.uuid);
             return res.status(201).json({token}); 
         } catch (error) {
+            if(error.code){
+                return next({code: error.code, message: error.message});
+            }else{
+                return next({code: 500});
+            }
+        }
+    }
+    async updatePassword(req, res, next){
+        try {
+            await this.ControllerService.updatePassword(req.body.uid, req.body.password);
+            return res.status(201).json({message:"okay"}); 
+        } catch (error) {
+            if(error.code){
+                return next({code: error.code, message: error.message});
+            }else{
+                return next({code: 500});
+            }
+        }
+    }
+    async forgotPassword(req,res,next){
+        try {
+            await this.ControllerService.forgotPassword(req.body.email);
+            return res.status(201).json({message:"okay"}); 
+        } catch (error) {
+            console.log(error);
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{

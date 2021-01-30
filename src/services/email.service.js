@@ -10,11 +10,11 @@ const _getTransport = () =>{
       });
 }
 
-const _getEmailOptions = (email, password) =>{
+const _getEmailOptions = (subject, email, password) =>{
     return {
         from: EmailConfig.authUser,
         to: email,
-        subject: 'Acceso a tu Delivery Lab',
+        subject,
         text: `Hola, gracias por escogernos, tu contraseña es: ${password}`,
         html: _bodyPassword(password)
     }
@@ -48,12 +48,22 @@ const _bodyPassword = (password) => {
 module.exports = {
     sendPassword: async (email, password) =>{
         let transporter = _getTransport();
-        let mailOptions = _getEmailOptions( email, password);
+        let mailOptions = _getEmailOptions('Acceso a tu Delivery Lab', email, password);
         try {
             await transporter.sendMail(mailOptions);   
         } catch (error) {
             let err = new Error("");
             throw err;
         }
-    }
+    },
+    forgotPassword: async (email, password) =>{
+        let transporter = _getTransport();
+        let mailOptions = _getEmailOptions('Recuperación de tu contraseña de tu Delivery Lab', email, password);
+        try {
+            await transporter.sendMail(mailOptions);   
+        } catch (error) {
+            let err = new Error("");
+            throw err;
+        }
+    },
 };

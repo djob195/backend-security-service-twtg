@@ -1,7 +1,7 @@
 const {controllerMapping} = require("./mappings");
 const jwt = require("jsonwebtoken");
 const {JwtConfig} = require("configs-twtg");
-const {sendPassword} = require("./email.service")
+const {sendPassword, forgotPassword} = require("./email.service")
 
 class ControllerService{
     constructor({ ControllerRepository }){
@@ -12,9 +12,7 @@ class ControllerService{
         return controllerMapping(cont);
     }
     async create(controller){
-        console.log("pasa aca");
         let auth = await this.ControllerRepository.createAuth(controller.email);
-        console.log("se creoooo", auth)
         sendPassword(controller.email, auth.password);
         controller.uid = auth.uid;
         let _controller = await this.ControllerRepository.create(controller);
@@ -61,6 +59,15 @@ class ControllerService{
             console.log(error);
         }
         return token;
+    }
+
+    async updatePassword(uid, password){
+        await this.ControllerRepository.updatePassword(uid, password);
+    }
+    
+    async forgotPassword(email){
+        let auth = await this.ControllerRepository.forgotPassword(email);
+        forgotPassword(email, auth.password);
     }
 }
 module.exports = ControllerService;
