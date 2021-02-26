@@ -11,6 +11,11 @@ class AuthenticationRepository {
         let data =  await UserModel.find({uid});
         return data;
     }
+    
+    async delete(uid){
+        await this.adminfb.auth().deleteUser(uid);
+        await this.twtOdm.db.UserModel.deleteOne({uid});
+    }
 
     async create(idToken, user){
         let tmp = null;
