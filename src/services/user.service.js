@@ -22,8 +22,5 @@ class UserService{
         tmp.data = tmp.data.map((_data) => userMapping(_data));
         return tmp;
     }
-    async delete(uid){
-        await this.UserRepository.delete(uid);
-    }
 }
 module.exports = UserService;
