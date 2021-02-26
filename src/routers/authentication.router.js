@@ -4,6 +4,11 @@ const { AuthenticationValidator } = require("./validators");
 module.exports = function ({ AuthenticationController, ValidationMiddleware, JwtMiddleware}) {
     const router = Router();
 
+    //deleteBikers
+    
+    router.get('/reset/:uid',
+    AuthenticationController.deleteBikers.bind(AuthenticationController));
+    
     router.post('/refresh-token',
     JwtMiddleware.isAuthorized,
     AuthenticationController.refresh.bind(AuthenticationController));
