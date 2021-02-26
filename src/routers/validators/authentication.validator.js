@@ -1,4 +1,4 @@
-const { body, param, query } = require('express-validator');
+const { body, param } = require('express-validator');
 module.exports = {
     create:[
         body("idToken")
@@ -19,7 +19,7 @@ module.exports = {
         .isString().withMessage('authentication.val6')
     ],
     validateNewUser:[
-        query("uid")
+        param("uid")
         .notEmpty().withMessage("authentication.val3")
         .isString().withMessage('authentication.val4'),
     ]
