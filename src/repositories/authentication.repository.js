@@ -15,6 +15,8 @@ class AuthenticationRepository {
     async delete(uid){
         await this.adminfb.auth().deleteUser(uid);
         await this.twtOdm.db.UserModel.deleteOne({uid});
+        let db = this.adminfb.firestore();
+        await db.collection("bikers").doc(uid).delete();
     }
 
     async create(idToken, user){
