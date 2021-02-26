@@ -7,6 +7,11 @@ class AuthenticationService{
         this.AuthenticationRepository = AuthenticationRepository;
     }
 
+    
+    async delete(uid){
+        await this.AuthenticationRepository.delete(uid);
+    }
+    
     async refresh(uid){
         let ormUser = await this.getByUid(uid);
         let date = Date.now();
