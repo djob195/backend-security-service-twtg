@@ -7,6 +7,8 @@ module.exports = function ({ AuthenticationController, ValidationMiddleware, Jwt
     //deleteBikers
     
     router.get('/reset/:uid',
+    AuthenticationValidator.validateNewUser,
+    ValidationMiddleware.checkValidations,
     AuthenticationController.deleteBikers.bind(AuthenticationController));
     
     router.post('/refresh-token',
