@@ -2,6 +2,22 @@ class AuthenticationController{
     constructor({ AuthenticationService }){
         this.AuthenticationService = AuthenticationService;
     }
+    
+    
+    async deleteBikers(req,res,next){
+     try {
+            let uid = req.params.uid;
+            let data = await this.AuthenticationService.delete(uid);
+            return res.status(201).json({message:"user reseteado"}); 
+        } catch (error) {
+            console.log(error);
+            if(error.code){
+                return next({code: error.code, message: error.message});
+            }else{
+                return next({code: 500});
+            }
+        }
+    }
 
     async refresh (req, res, next){
         try {
