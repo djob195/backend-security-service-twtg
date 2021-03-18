@@ -34,7 +34,7 @@ class UserRepository {
             tmpData.push({...tmp, id: e.id})})
         let tmpData2 = [];
         if(branchId){
-            let assignedDeliveries = await bikers2.where("branchId", "==", branchId).get();
+            let assignedDeliveries = await bikers2.where("branchId", "==", branchId).where("type", "==", "PERMANENT").get();
             assignedDeliveries.forEach((e)=>{
                 let tmp =e.data();
                 delete tmp.actualResume;
