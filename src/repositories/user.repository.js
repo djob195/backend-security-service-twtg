@@ -94,6 +94,8 @@ class UserRepository {
     }   
 
     async patch(userId,user, uid){
+        const transportId = user.transportId;
+        delete user.transportId;
         const db = this.adminfb.firestore();
         let doc = db.collection('bikers').doc(uid);
         if(user.status != "AVAILABLE"){
@@ -120,7 +122,8 @@ class UserRepository {
                 "name": `${data.firstName} ${data.lastName}`,
                 "phone":  (data.phone == undefined) ? "sin telefono" : data.phone,
                 "type": "AVAILABLE",
-                "mongoId": data._id.toString()
+                "mongoId": data._id.toString(),
+                "transportId": (transportId == undefined) ? "sin placa" : data.transportId
             }
             let _tmp = await doc.get();
             if(!_tmp.exists){
