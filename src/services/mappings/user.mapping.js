@@ -12,7 +12,8 @@ module.exports = (entity) =>{
         'branchOffice': 'branchOffice',
         'branchOfficeId': 'branchOfficeId',
         'available': 'available',
-        'status': 'status'
+        'status': 'status',
+        'transportId': 'transportId'
     }
     return objectMapper(entity, map);
 }
