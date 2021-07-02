@@ -57,6 +57,10 @@ module.exports = {
         body("phone")
         .optional()
         .isNumeric().withMessage("users.val28"),
+        body("transportId")
+        .optional()
+        .isString().withMessage("users.val2")
+        .notEmpty().withMessage("users.val3"),
         body("status")
         .isIn(["NEW", "QUEUE", "CHECKING", "UNABLE", "ACTIVE", "INACTIVE"]).withMessage("users.val21")
     ]
