@@ -123,7 +123,7 @@ class UserRepository {
                 "phone":  (data.phone == undefined) ? "sin telefono" : data.phone,
                 "type": "AVAILABLE",
                 "mongoId": data._id.toString(),
-                "transportId": (transportId == undefined) ? "sin placa" : data.transportId
+                "transportId": (transportId == undefined) ? "sin placa" : transportId
             }
             let _tmp = await doc.get();
             if(!_tmp.exists){
