@@ -22,26 +22,31 @@ const _getEmailOptions = (subject, email, password) =>{
 
 const _bodyPassword = (password) => {
     return `
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="6
-        <tr>
-            <td bgcolor="#70bbd9">
-                <td align="center" bgcolor="#20419a" style="padding: 40px 0 30px 0;">
-                    <img src="https://twowheelstogo-572d7.web.app/static/media/DLlogo.28780847.png" alt="Logo de delivery lab" width="550" height="150" style="display: block;" />
-                </td>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="6z
+    <tr>
+        <td bgcolor="#70bbd9">
+            <td align="center" bgcolor="#20419a" style="padding: 40px 0 30px 0;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/twowheelstogo-572d7.appspot.com/o/logotipos%2FDLlogo2.png?alt=media&token=24fc77df-61df-4aaf-9c42-0f533a281aa8" alt="Logo de delivery lab" width="550" height="150" style="display: block;" />
             </td>
-        </tr>
-        <tr>
-            <td  bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
-                <h1 style="color: #153643; font-family: Arial, sans-serif; font-size: 24px;">Gracias por pertenecer a Delivery Lab</h1>
-				<p style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">Ingresa la siguiente contraseña, para entrar al portal de Delivery Lab: <strong>${password}</strong></p>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor="#20419a" style="padding: 10px 30px 10px 30px;" style="color: #ffffff; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                Derechos reservados por Delivery Lab &#169;
-            </td>
-        </tr>
-    </table>
+        </td>
+    </tr>
+    <tr>
+        <td  bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+            <h1 style="color: #000; font-family: Arial, sans-serif; font-size: 24px; padding-bottom: 20px; text-align:center;font-weight:700;">BIENVENIDO A DELIVERY LAB</h1>
+            <p style="color: #BEBEBE; font-family: Arial, sans-serif; font-size: 16px;"> CONECTATE A LA SIGUIENTE PÁGINA https://tw2g.app/login </p>
+            <p style="color: #BEBEBE; font-family: Arial, sans-serif; font-size: 16px;">UTILIZA LOS SIGUIENTES DATOS DE AUTENTICACIÓN</p>
+            <div style="border: 1px solid #dcdcdc; padding: 30px 30px 10px 30px;">
+            <p style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">Usuario:  <strong style="color: #008BFF;padding-left:5px;">${email}</strong></p>
+                    <p style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">Contraseña:<strong style="color: #008BFF;padding-left:5px;">${password}</strong></p>
+            </div>
+        </td>
+    </tr>
+    <tr >
+        <td bgcolor="#20419a" style="padding: 10px 30px 10px 30px;">
+        <h6 style="color:#dcdcdc;"> Derechos reservados por Delivery Lab &#169; </h6>
+        </td>
+    </tr>
+</table>
     `;
 }
 
