@@ -16,11 +16,11 @@ const _getEmailOptions = (subject, email, password) =>{
         to: email,
         subject,
         text: `Hola, gracias por escogernos, tu contraseña es: ${password}`,
-        html: _bodyPassword(password)
+        html: _bodyPassword(password,email)
     }
 }
 
-const _bodyPassword = (password) => {
+const _bodyPassword = (password,email) => {
     return `
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="6z
     <tr>
