@@ -30,10 +30,6 @@ services:
             - SSH_PRIVATE=${SSH_PRIVATE}
             - SSH_PUBLIC=${SSH_PUBLIC}
             - SSH_KNOWN_HOSTS=${SSH_KNOWN_HOSTS}
-            - EMAIL_SERVICE=${EMAIL_SERVICE}
-            - AUTH_USER=${AUTH_USER}
-            - AUTH_PASSWORD=${AUTH_PASSWORD}
-            - EMAIL_TO=${EMAIL_TO}
         networks:
             - networksec2
         depends_on:

@@ -62,7 +62,6 @@ class ControllerService{
     }
 
     async updatePassword(uid, password){
-        console.log(uid, password)
         await this.ControllerRepository.updatePassword(uid, password);
     }
     

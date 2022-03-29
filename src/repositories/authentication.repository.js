@@ -88,17 +88,17 @@ class AuthenticationRepository {
             }
             throw error;
         }
-        // let data =  await this.twtOdm.db.UserModel.findOneAndUpdate({uid:tmp.uid}, {pushToken});
-        // if(data == undefined){
-        //     let error = new Error("errors.authentication.e1");
-        //     error.code = 400;
-        //     throw error;
-        // }
-        // if(data.status != "ACTIVE"){
-        //     let error = new Error("errors.authentication.e2");
-        //     error.code = 401;
-        //     throw error;
-        // }
+        let data =  await this.twtOdm.db.UserModel.findOneAndUpdate({uid:tmp.uid}, {pushToken});
+        if(data == undefined){
+            let error = new Error("errors.authentication.e1");
+            error.code = 400;
+            throw error;
+        }
+        if(data.status != "ACTIVE"){
+            let error = new Error("errors.authentication.e2");
+            error.code = 401;
+            throw error;
+        }
         const db = this.adminfb.firestore();
         let fbUser = await db.collection('bikers')
         .doc(tmp.user_id);
