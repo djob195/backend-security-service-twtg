@@ -9,6 +9,7 @@ class ControllerController{
             let tmp = await this.ControllerService.get(id);  
             return res.status(201).json(tmp);           
         } catch (error) {
+            console.log(error)
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
@@ -22,6 +23,7 @@ class ControllerController{
             let tmp = await this.ControllerService.create(req.body);
             return res.status(201).json(tmp);    
         } catch (error) {
+            console.log(error)
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
@@ -36,6 +38,7 @@ class ControllerController{
             let tmp = await this.ControllerService.getAll(skip, limit);
             return res.status(201).json(tmp);    
         } catch (error) {
+            console.log(error)
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
@@ -64,6 +67,7 @@ class ControllerController{
             let token = await this.ControllerService.login(req.body.uuid);
             return res.status(201).json({token}); 
         } catch (error) {
+            console.log(error)
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{
@@ -76,6 +80,7 @@ class ControllerController{
             await this.ControllerService.updatePassword(req.body.uid, req.body.password);
             return res.status(201).json({message:"okay"}); 
         } catch (error) {
+            console.log(error)
             if(error.code){
                 return next({code: error.code, message: error.message});
             }else{

@@ -45,6 +45,7 @@ class ControllerRepository {
                 disabled: false
               });
         } catch (error) {
+            console.log(error)
             let err = new Error("");
             throw new err;
         }
@@ -82,13 +83,14 @@ class ControllerRepository {
         const controllerModel = new this.twtOdm.db.ControllerModel(controller);
         let demo = null;
         try {
-            demo = await controllerModel.save();   
+            // demo = await controllerModel.save();   
             let doc = db.collection('controllers').doc(controller.uid);
             delete controller.uid;
             controller.isFirstTime = true;
-            controller = {...controller, mongoId: demo.id};
+            controller = {...controller, /*mongoId: demo.id*/};
             await doc.set(controller);
         } catch (error) {
+            console.log(error)
             if(error.code == 11000){
                 let error = new Error("errors.authentication.e2");
                 error.code = 409;
